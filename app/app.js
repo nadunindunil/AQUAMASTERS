@@ -17,8 +17,12 @@ app.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'view2/view2.html',
           controller: 'UniCtrl'
         }).
-        when('/view1', {
-          templateUrl: 'view1/view1.html',
+        when('/view3', {
+          templateUrl: 'view3/view3.html',
+          controller: 'GroupCtrl'
+        })
+        .when('/view3/:groupId', {
+          templateUrl: 'view2/view2.html',
           controller: 'UniCtrl'
         }).
         otherwise({
