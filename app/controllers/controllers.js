@@ -80,7 +80,7 @@ app.controller('UniCtrl', function ($scope, customersService) {
 
     });
 
-
+/*
 app.controller('GroupCtrl', function($scope,$http){
 
     $scope.listofGroups= null;
@@ -91,9 +91,16 @@ app.controller('GroupCtrl', function($scope,$http){
             $scope.listofGroups = data;}
     );
 
-});
+});*/
+
+app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact)
+{
+    $scope.listofGroups = groupsFact.GetData();
+
+}]);
 
 
+/*
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
         $scope.MembersList=null;
@@ -101,4 +108,11 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
         $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
         });
-    }]);
+    }]);*/
+
+app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersFact)
+{
+    $scope.MembersList = membersFact.GetData();
+
+}]);
+

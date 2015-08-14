@@ -19,10 +19,24 @@ app.config(['$routeProvider', function($routeProvider) {
         }).
         when('/view3', {
           templateUrl: 'view3/view3.html',
-          controller: 'GroupCtrl'
+          controller: 'GroupCtrl',
+          resolve: {
+            load: function (groupsFact) {
+              return groupsFact.LoadData();
+            }
+          }
         })
         .when('/view3/:groupId', {
           templateUrl: 'view2/view2.html',
+          controller: 'MemberCtrl',
+          resolve: {
+            load: function (membersFact) {
+              return membersFact.LoadData();
+            }
+          }
+        }).
+        when('/dashboard', {
+          templateUrl: 'partials/dashboard.html',
           controller: 'UniCtrl'
         }).
         otherwise({
