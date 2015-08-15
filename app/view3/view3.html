@@ -32,10 +32,11 @@
 
     <div class="panel panel-default" ng-controller="GroupCtrl">
       <div class="panel-heading">
-        Registered Groups ({{listofGroups.length}})
+        <div class="col-lg-5 col-lg-offset-1">Registered Groups ({{listofGroups.length}})</div>
+        <div class="col-lg-6"><input data-ng-model="query" type="text" placeholder="Search"></div>
       </div>
       <div class="panel-body">
-          <div class="table-responsive">
+          <div class="dataTable_wrapper">
               <table class="table table-hover">
                   <thead>
                   <tr>
@@ -46,7 +47,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr data-ng-repeat="group in listofGroups| orderBy:'_id'" >
+                  <tr class="repeated-item" data-ng-repeat="group in listofGroups | filter:query | orderBy:'_id'" >
                       <td>{{group._id}}</td>
                       <td>{{group.number}}</td>
                       <td>{{group.balance}}.00</td>
@@ -70,3 +71,4 @@
   </div>
   <!-- /.col-lg-12 -->
 </div>
+

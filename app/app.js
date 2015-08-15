@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
+  'ngAnimate',
   'myApp.version'
 ]);
 
@@ -28,19 +29,14 @@ app.config(['$routeProvider', function($routeProvider) {
         })
         .when('/view3/:groupId', {
           templateUrl: 'view2/view2.html',
-          controller: 'MemberCtrl',
-          resolve: {
-            load: function (membersFact) {
-              return membersFact.LoadData();
-            }
-          }
+          controller: 'MemberCtrl'
         }).
         when('/dashboard', {
           templateUrl: 'partials/dashboard.html',
           controller: 'UniCtrl'
         }).
         otherwise({
-          redirectTo: '/view1'
+          redirectTo: '/dashboard'
         });
 
 }]);

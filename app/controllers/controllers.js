@@ -100,19 +100,20 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 }]);
 
 
-/*
+
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
         $scope.MembersList=null;
+        //console.log($routeParams);
         $scope.GroupID = $routeParams.groupId;
         $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
         });
-    }]);*/
-
+    }]);
+/*
 app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersFact)
 {
     $scope.MembersList = membersFact.GetData();
 
 }]);
-
+*/

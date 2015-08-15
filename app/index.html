@@ -17,7 +17,8 @@
   <link rel="stylesheet" href="CustomStyles/panels.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="CustomStyles/myStyle.css">
-
+  <link rel="stylesheet" href="CustomStyles/animations.css">
+  <link rel="stylesheet" href="CustomStyles/transitions.css">
 
 
 
@@ -281,7 +282,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
 
-      <div ng-view></div>
+      <div ng-view id="div-view" class="view-slide-in"></div>
       <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
@@ -299,6 +300,7 @@
   -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
   <script src="controllers/controllers.js"></script>
@@ -307,6 +309,7 @@
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 
 </body>
 </html>
