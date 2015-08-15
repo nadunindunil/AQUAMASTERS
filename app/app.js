@@ -16,11 +16,11 @@ app.config(['$routeProvider', function($routeProvider) {
           controller: 'UniCtrl'
         }).
         when('/view2', {
-          templateUrl: 'view2/view2.html',
+          templateUrl: 'view2/members.html',
           controller: 'UniCtrl'
         }).
         when('/view3', {
-          templateUrl: 'view3/view3.html',
+          templateUrl: 'view3/groups.html',
           controller: 'GroupCtrl',
           resolve: {
             load: function (groupsFact) {
@@ -29,7 +29,7 @@ app.config(['$routeProvider', function($routeProvider) {
           }
         })
         .when('/view3/:groupId', {
-          templateUrl: 'view2/view2.html',
+          templateUrl: 'view2/members.html',
           controller: 'MemberCtrl'
         }).
         when('/dashboard', {
