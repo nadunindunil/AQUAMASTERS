@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
+   'cgBusy',
   'ngAnimate',
   'myApp.version'
 ]);
@@ -33,6 +34,10 @@ app.config(['$routeProvider', function($routeProvider) {
         }).
         when('/dashboard', {
           templateUrl: 'partials/dashboard.html',
+          controller: 'UniCtrl'
+        }).
+        when('/profile', {
+          templateUrl: 'partials/profile.html',
           controller: 'UniCtrl'
         }).
         otherwise({

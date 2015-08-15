@@ -106,7 +106,7 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
         $scope.MembersList=null;
         //console.log($routeParams);
         $scope.GroupID = $routeParams.groupId;
-        $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
+        $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
         });
     }]);
