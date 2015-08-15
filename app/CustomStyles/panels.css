@@ -317,6 +317,26 @@ table.dataTable thead .sorting:after {
     color: #3d8b3d;
 }
 
+.panel-white {
+    border-color: #d5d5d5;
+}
+
+.panel-white .panel-heading {
+    border-color:#d5d5d5;
+    color: #080808;
+    background-color: #fafafa;
+}
+
+.panel-white a {
+    color: #fafafa;
+}
+
+.panel-white a:hover {
+    color: #d5d5d5;
+}
+
+
+
 .panel-red {
     border-color: #d9534f;
 }
