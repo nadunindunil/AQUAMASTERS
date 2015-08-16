@@ -103,13 +103,28 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
+
+        
+
         $scope.MembersList=null;
         //console.log($routeParams);
         $scope.GroupID = $routeParams.groupId;
         $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
         });
-    }]);
+
+        function init(){
+            $scope.firstName = "";
+            $scope.lasstName = "";
+            $scope.DDate = "";
+            $scope.nic = null;
+            $scope.Balance = null;
+            $scope.area = "";
+        }
+    }]
+
+
+);
 /*
 app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersFact)
 {

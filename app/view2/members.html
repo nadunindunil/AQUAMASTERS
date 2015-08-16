@@ -1,4 +1,4 @@
-<div class="row " ng-controller="MemberCtrl"  cg-busy="{promise:mypromise,templateUrl:'partials/custom-template.html'}" xmlns="http://www.w3.org/1999/html">
+<div class="row " ng-controller="MemberCtrl" cg-busy="{promise:mypromise,templateUrl:'partials/custom-template.html'}" xmlns="http://www.w3.org/1999/html">
   <div class="col-lg-12">
     <h4 class="page-header"> ({{GroupID}}) Group's Member Management</h4>
     <div class="under">
@@ -17,11 +17,70 @@
               <h4 class="modal-title" id="myModalLabel"> Add new Member</h4>
             </div>
             <div class="modal-body">
+                <div class="row" style="padding-left: 15px;">
+                  <div class="col-lg-9 col-lg-offset-1 form">
+                    <div class="row from-group" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">First Name:</label>
 
+                      <input class="form-control pull-right" 
+                             style="width: 300px; height: 35px" data-ng-model="firstName" type="text" placeholder="First Name">
+                    </div>
+                    <div class="row from-group" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">Last Name:</label>
+
+                      <input class="form-control pull-right"
+                             style="width: 300px; height: 35px" data-ng-model="lastName" type="text" placeholder="Last Name">
+                    </div>
+                    <div class="row from-group" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">NIC:</label>
+
+                      <input class="form-control pull-right"
+                             style="width: 300px; height: 35px" data-ng-model="nic" type="number" placeholder="NIC">
+                    </div>
+
+                    <div class="row" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">Balance:</label>
+
+                      <div class="from-group input-group" style="padding-left: 1.7cm">
+                        <span class="input-group-addon">Rs.</span>
+                        <input class="form-control"
+                               style=" height: 35px" data-ng-model="Balance" type="number" placeholder="Balance">
+                        <span class="input-group-addon">.00</span>
+
+                      </div>
+                    </div>
+
+
+                    <div class="row from-group" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">Due Date:</label>
+
+
+                      <input class="form-control pull-right"
+                             style="width: 300px; height: 35px" data-ng-model="DDate" type="date">
+
+                    </div>
+                    <div class="row from-group" style="padding-bottom: 5px">
+                      <label class="pull-left" style="padding-left: 1cm">Area:</label>
+
+                      <input class="form-control pull-right"
+                             style="width: 300px; height: 35px" data-ng-model="area" type="text" placeholder="Area">
+                    </div>
+
+
+
+                  </div>
+                </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer" style="height: 2cm;;">
+
+
+              <div class="row form-group pull-right" style="padding-top: 10px;padding-right: 20px;">
+
+                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                <button class="btn btn-success btn-sm" type="button"
+                        data-ng-disabled="!firstName || !lastName || !nic || !Balance || !DDate || !area  "
+                        data-ng-click="insertCustomer()" data-dismiss="modal"> Add Memeber</button>
+              </div>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -31,8 +90,10 @@
     </div>
 
     <div class="panel panel-white" >
-      <div class="panel-heading">
-        Registered Members ({{MembersList.length}})
+      <div class="panel-heading clearfix">
+
+        <div class="pull-left"> Registered Members ({{MembersList.length}})</div>
+        <input class="form-control pull-right" type="text" data-ng-model="query" placeholder="Filter" style="width: 180px;height: 25px;">
       </div>
       <div class="panel-body">
         <div class="table-responsive">
@@ -48,7 +109,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="member in MembersList| orderBy:'Name'">
+            <tr data-ng-repeat="member in MembersList| filter:query | orderBy:'Name'">
               <td>{{member.NIC}}</td>
               <td>{{member.Name}}</td>
               <td>{{member.Balance}}.00</td>

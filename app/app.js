@@ -4,6 +4,7 @@
 var app = angular.module('myApp', [
   'ngRoute',
    'cgBusy',
+  'ngScrollbar',
   'ngAnimate',
   'myApp.version'
 ]);
