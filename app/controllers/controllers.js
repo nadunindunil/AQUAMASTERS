@@ -104,7 +104,7 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
     function($scope, $routeParams, $http) {
 
-        
+
 
         $scope.MembersList=null;
         //console.log($routeParams);
@@ -113,18 +113,21 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
             $scope.MembersList = data;
         });
 
-        function init(){
-            $scope.firstName = "";
-            $scope.lasstName = "";
-            $scope.DDate = "";
+        $scope.reset = function(){
+            $scope.firstName = null;
+            $scope.lastName = null;
+            $scope.DDate = null;
             $scope.nic = null;
             $scope.Balance = null;
-            $scope.area = "";
-        }
+            $scope.area = null;
+        };
+
     }]
 
 
 );
+
+
 /*
 app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersFact)
 {

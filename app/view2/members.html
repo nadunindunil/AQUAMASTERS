@@ -76,10 +76,10 @@
 
               <div class="row form-group pull-right" style="padding-top: 10px;padding-right: 20px;">
 
-                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                <button type="button reset" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 <button class="btn btn-success btn-sm" type="button"
                         data-ng-disabled="!firstName || !lastName || !nic || !Balance || !DDate || !area  "
-                        data-ng-click="insertCustomer()" data-dismiss="modal"> Add Memeber</button>
+                        data-ng-click="reset(); " data-dismiss="modal"> Add Memeber</button>
               </div>
             </div>
           </div>
@@ -93,7 +93,8 @@
       <div class="panel-heading clearfix">
 
         <div class="pull-left"> Registered Members ({{MembersList.length}})</div>
-        <input class="form-control pull-right" type="text" data-ng-model="query" placeholder="Filter" style="width: 180px;height: 25px;">
+        <input class="form-control pull-right" data-ng-model="query" type="text" class="form-control empty" id="iconified" placeholder="&#xF002; Search.." style="width: 180px;height: 25px;font-family:Arial, FontAwesome">
+
       </div>
       <div class="panel-body">
         <div class="table-responsive">
