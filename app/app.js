@@ -16,20 +16,20 @@ app.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'view1/view1.html',
           controller: 'UniCtrl'
         }).
-        when('/view2', {
+        when('/members', {
           templateUrl: 'view2/members.html',
           controller: 'UniCtrl'
         }).
-        when('/view3', {
+        when('/members/:NIC', {
+          templateUrl: 'partials/memProfile.html',
+          controller: 'MemberProfileCtrl'
+        }).
+        when('/groups', {
           templateUrl: 'view3/groups.html',
-          controller: 'GroupCtrl',
-          resolve: {
-            load: function (groupsFact) {
-              return groupsFact.LoadData();
-            }
-          }
+          controller: 'GroupCtrl'
+
         })
-        .when('/view3/:groupId', {
+        .when('/groups/:groupId', {
           templateUrl: 'view2/members.html',
           controller: 'MemberCtrl'
         }).

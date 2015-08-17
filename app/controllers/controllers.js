@@ -80,25 +80,27 @@ app.controller('UniCtrl', function ($scope, customersService) {
 
     });
 
-/*
+
 app.controller('GroupCtrl', function($scope,$http){
 
     $scope.listofGroups= null;
 
-    $http.get('http://104.236.206.83:3000/group.summary')
+    $scope.mypromise2 = $http.get('http://104.236.206.83:3000/group.summary')
         .success(function(data) {
             console.log(data);
             $scope.listofGroups = data;}
     );
 
-});*/
+});
 
+/*
 app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact)
 {
     $scope.listofGroups = groupsFact.GetData();
 
-}]);
 
+}]);
+*/
 
 
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
@@ -135,3 +137,26 @@ app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersF
 
 }]);
 */
+
+
+app.controller('MemberProfileCtrl', ['$scope', '$routeParams', '$http',
+        function($scope, $routeParams, $http) {
+
+
+
+            $scope.ProfileContent=null;
+            $scope.Transactions = null;
+            //console.log($routeParams);
+            $scope.NIC = $routeParams.groupId;
+            $scope.mypromise3 = $http.get('http://104.236.206.83:3000/find/' + $routeParams.NIC ).success(function(data) {
+                $scope.ProfileContent = data;
+                $scope.Transactions = data.Trans;
+                console.log(data);
+            });
+
+
+
+        }]
+
+
+);

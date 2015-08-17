@@ -120,12 +120,12 @@
             <tbody>
             <tr data-ng-repeat="member in MembersList| filter:query | orderBy:'Name'">
               <td>{{member.NIC}}</td>
-              <td>{{member.Name}}</td>
+              <td>{{member.FirstName}}  {{member.LastName}}</td>
               <td>{{member.Balance}}.00</td>
               <td>{{member.DueDate}}</td>
               <td>{{member.Area}}</td>
               <td><div class="btn-group">
-                <button type="button" class="btn btn-info btn-xs"><i class="fa fa-user"></i> Profile</button>
+                <a href="#/members/{{member.NIC}}" class="btn btn-info btn-xs"  style="color: #ffffff" role="button"><i class="fa fa-users"></i> Profile</a>
                 <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
 
               </div>
