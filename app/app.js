@@ -18,7 +18,7 @@ app.config(['$routeProvider', function($routeProvider) {
         }).
         when('/members', {
           templateUrl: 'view2/members.html',
-          controller: 'UniCtrl'
+          controller: 'MemberCtrl2'
         }).
         when('/members/:NIC', {
           templateUrl: 'partials/memProfile.html',
@@ -40,6 +40,11 @@ app.config(['$routeProvider', function($routeProvider) {
         when('/profile', {
           templateUrl: 'partials/profile.html',
           controller: 'UniCtrl'
+        }).
+        when('/notifications', {
+          templateUrl: 'partials/notifications.html',
+          controller: 'NotificationsCtrl'
+
         }).
         otherwise({
           redirectTo: '/dashboard'

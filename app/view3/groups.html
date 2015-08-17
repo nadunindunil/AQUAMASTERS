@@ -25,11 +25,61 @@
                         <h4 class="modal-title" id="myModalLabel"> Add new Group</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="row" style="padding-left: 15px;">
+                            <div class="col-lg-9 col-lg-offset-1 form">
+                                <div class="row" style="padding-bottom: 5px">
+                                    <label class="pull-left" style="padding-left: 1cm">Balance:</label>
 
+                                    <div class="from-group input-group" style="padding-left: 1.7cm">
+                                        <span class="input-group-addon">Rs.</span>
+                                        <input class="form-control"
+                                               style=" height: 35px" data-ng-model="Balance" type="number" placeholder="Balance">
+                                        <span class="input-group-addon">.00</span>
+
+                                    </div>
+                                </div>
+                                <div class="row from-group" style="padding-bottom: 5px">
+                                    <label class="pull-left" style="padding-left: 1cm">No. of Members:</label>
+
+                                    <input class="form-control pull-right"
+                                           style="width: 300px; height: 35px" data-ng-model="NoMembers" type="text" placeholder="No. of members">
+                                </div>
+                                <div class="row from-group" style="padding-bottom: 5px">
+                                    <label class="pull-left" style="padding-left: 1cm">Area:</label>
+
+                                    <input class="form-control pull-right"
+                                           style="width: 300px; height: 35px" data-ng-model="area" type="text" placeholder="Area">
+                                </div>
+
+                                <div class="row" style="padding-bottom: 5px">
+                                    <label class="pull-left" style="padding-left: 1cm">ID:</label>
+
+                                    <div class="from-group input-group" style="padding-left: 2.8cm">
+                                        <span class="input-group-addon"> KUR</span>
+                                        <input class="form-control"
+                                               style=" height: 35px" data-ng-model="id" type="number" >
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-footer" style="height: 2cm;;">
+
+
+                        <div class="row form-group pull-right" style="padding-top: 10px;padding-right: 20px;">
+
+                            <button type="button reset" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                            <button class="btn btn-success btn-sm" type="button"
+                                    data-ng-disabled="!Balance || !NoMembers || !id || !area "
+                                    data-ng-click="reset(); " data-dismiss="modal"> Add Memeber</button>
+                        </div>
                     </div>
                 </div>
                 <!-- /.modal-content -->

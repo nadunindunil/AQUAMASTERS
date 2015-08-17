@@ -90,7 +90,13 @@ app.controller('GroupCtrl', function($scope,$http){
             console.log(data);
             $scope.listofGroups = data;}
     );
+    /*
+    $scope.addGroup = function(balance,NoMembers,Area,ID){
 
+        $http.post();
+
+    };
+    */
 });
 
 /*
@@ -123,8 +129,33 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
             $scope.Balance = null;
             $scope.area = null;
         };
+/*
+        $scope.addGroup = function(balance,NoMembers,Area,ID){
+
+            $http.post();
+
+        };*/
 
     }]
+
+
+);
+
+
+app.controller('MemberCtrl2', ['$scope', '$http',
+        function($scope, $http) {
+
+
+
+            $scope.MembersList=null;
+            //console.log($routeParams);
+
+            $scope.mypromise = $http.get('http://104.236.206.83:3000/users').success(function(data) {
+                $scope.MembersList = data;
+            });
+
+
+        }]
 
 
 );
