@@ -101,7 +101,7 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
         var ID = $scope.id;
 
         var Number = 0;
-        var Area = $scope.area;
+        var Area = $scope.area.charAt(0).toUpperCase() + $scope.area.toLowerCase()
         var pre = Area.substring(0, 3);
         var pre2 = pre.toUpperCase();
         ID = pre2+ ID;
@@ -144,6 +144,7 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
         $scope.GroupID = $routeParams.groupId;
         $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
+            console.log(data);
         });
 
         $scope.reset = function(){
@@ -164,16 +165,20 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
         }
 
+        //input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+
         $scope.addMember = function(){
-            var FName  =$scope.firstName ;
-            var LName  =$scope.lastName ;
-            var ddate  =$scope.DDate  ;
-            var  Nic   =$scope.nic ;
-            var balance=$scope.Balance  ;
-            var Area   =$scope.area  ;
-            var gid = $scope.GroupID;
-            var Addr = $scope.addr;
+            var FName  = $scope.firstName.charAt(0).toUpperCase() + $scope.firstName.toLowerCase() ;
+            var LName  = $scope.lastName.charAt(0).toUpperCase() + $scope.lastName.toLowerCase()
+            var ddate  = $scope.DDate  ;
+            var  Nic   = $scope.nic ;
+            var balance= $scope.Balance  ;
+            var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.toLowerCase()
+            var gid =    $scope.GroupID;
+            var Addr =   $scope.address.charAt(0).toUpperCase() + $scope.address.toLowerCase()
             var teleph = $scope.telephone;
+
+            console.log(Addr);
 
             $http.post('http://104.236.206.83:3000/adduser',{ id : Nic ,
                 first : FName ,
@@ -188,17 +193,15 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
             });
 
-            $scope.MembersList.push({id : Nic ,
-                first : FName ,
-                last: LName,
-                area: Area,
-                amount : balance,
-                date : ddate,
-                gid : gid,
-                address :Addr,
-                tel : teleph,
-                product : "filter"
-        })
+            $scope.MembersList.push({NIC : Nic ,
+                FirstName : FName ,
+                LastName : LName,
+                Area: Area,
+                Balance : balance,
+                DueDate : ddate
+
+
+        });
 
         };
 

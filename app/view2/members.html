@@ -45,7 +45,7 @@
                       <div class="from-group input-group" style="padding-left: 1.7cm">
 
                         <input class="form-control pull-right"
-                               style="width: 267px; height: 35px" data-ng-model="nic" type="number" placeholder="NIC">
+                               style="width: 267px; height: 35px" data-ng-model="nic" type="number" maxlength="9" placeholder="NIC">
                         <span class="input-group-addon">   V</span>
 
                       </div>
@@ -57,7 +57,7 @@
                       <div class="from-group input-group" style="padding-left: 1.7cm">
                         <span class="input-group-addon">Rs.</span>
                         <input class="form-control"
-                               style=" height: 35px" data-ng-model="Balance" type="number" placeholder="Balance">
+                               style=" height: 35px" data-ng-model="Balance" maxlength="9" type="number" placeholder="Balance">
                         <span class="input-group-addon">.00</span>
 
                       </div>
@@ -83,7 +83,7 @@
                       <label class="pull-left" style="padding-left: 1cm">Telephone:</label>
 
                       <input class="form-control pull-right"
-                             style="width: 300px; height: 35px" data-ng-model="telephone" type="text" placeholder="Telephone">
+                             style="width: 300px; height: 35px" data-ng-model="telephone" type="text" maxlength="10" placeholder="Telephone">
                     </div>
 
                     <div class="row from-group" style="padding-bottom: 5px">
@@ -106,7 +106,7 @@
                 <button type="button reset" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 <button class="btn btn-success btn-sm" type="button"
                         data-ng-disabled="!firstName || !lastName || !nic || !Balance || !DDate || !area  || !telephone"
-                        data-ng-click="reset(); addMember();" data-dismiss="modal"> Add Memeber</button>
+                        data-ng-click=" addMember();" data-dismiss="modal"> Add Memeber</button>
               </div>
             </div>
           </div>
