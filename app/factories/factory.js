@@ -39,3 +39,22 @@ app.factory('membersFact',['$routeParams','$http','$q',function ($q, $http, $rou
     }
 
 }]);
+
+app.service('groupService',function (){
+
+    this.insertGroup = function(Balance, Area , ID , number){
+
+        listofGroups.push({
+            _id: ID,
+            number: number,
+            balance: Balance
+
+        });
+
+        $scope.services.push.apply($scope.services, data.services);
+    };
+
+    this.getGroups = function () {
+        return listofGroups;
+    };
+})

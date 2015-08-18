@@ -48,14 +48,7 @@
 
                 </div>
                 <div class="panel-body">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item" data-ng-repeat="trans in ProfileContent.Trans">
-                            <i class="fa fa-comment fa-fw" style="color: black;"></i> {{trans.amount}}
-                                    <span class="pull-right text-muted small"><em> {{trans.date}}</em>
-                                    </span>
-                        </a>
 
-                    </div>
                     <!-- /.list-group -->
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -69,7 +62,7 @@
                             <tbody>
                             <tr data-ng-repeat="trans in Transactions | filter:query">
                                 <td>{{trans.date}}</td>
-                                <td>{{trans.amount}}</td>
+                                <td>  Rs.{{trans.amount}}.00</td>
 
                             </tr>
 

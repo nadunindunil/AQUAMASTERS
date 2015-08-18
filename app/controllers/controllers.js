@@ -81,8 +81,9 @@ app.controller('UniCtrl', function ($scope, customersService) {
     });
 
 
-app.controller('GroupCtrl', function($scope,$http){
+app.controller('GroupCtrl', function($scope,$http,$rootScope){
 
+    $rootScope.area = null;
     $scope.listofGroups= null;
 
     $scope.mypromise2 = $http.get('http://104.236.206.83:3000/group.summary')
@@ -90,6 +91,30 @@ app.controller('GroupCtrl', function($scope,$http){
             console.log(data);
             $scope.listofGroups = data;}
     );
+
+
+
+
+    $scope.insertGroup = function(){
+
+        var Balance = $scope.Balance;
+        var ID = $scope.id;
+
+        var Number = 0;
+        var Area = $scope.area;
+        var pre = Area.substring(0, 3);
+        var pre2 = pre.toUpperCase();
+        ID = pre2+ ID;
+        $rootScope.area = Area;
+
+
+        //groupService.insertGroup(Balance,Area,ID,number);
+        $scope.listofGroups.push({ _id : ID ,
+            number : Number ,
+            balance: Balance,
+            area: Area} );
+    };
+
     /*
     $scope.addGroup = function(balance,NoMembers,Area,ID){
 
@@ -109,10 +134,10 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 */
 
 
-app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
-    function($scope, $routeParams, $http) {
+app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
+    function($scope, $routeParams, $http , $rootScope ) {
 
-
+        init();
 
         $scope.MembersList=null;
         //console.log($routeParams);
@@ -128,13 +153,54 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http',
             $scope.nic = null;
             $scope.Balance = null;
             $scope.area = null;
+            $scope.addr = null;
+            $scope.telephone = null;
+
         };
-/*
-        $scope.addGroup = function(balance,NoMembers,Area,ID){
 
-            $http.post();
+        function init() {
+            $scope.area = $rootScope.area;
 
-        };*/
+
+        }
+
+        $scope.addMember = function(){
+            var FName  =$scope.firstName ;
+            var LName  =$scope.lastName ;
+            var ddate  =$scope.DDate  ;
+            var  Nic   =$scope.nic ;
+            var balance=$scope.Balance  ;
+            var Area   =$scope.area  ;
+            var gid = $scope.GroupID;
+            var Addr = $scope.addr;
+            var teleph = $scope.telephone;
+
+            $http.post('http://104.236.206.83:3000/adduser',{ id : Nic ,
+                first : FName ,
+                last: LName,
+                area: Area,
+                amount : balance,
+                date : ddate,
+                gid : gid,
+                address :Addr,
+                tel : teleph,
+                product : "filter"
+
+            });
+
+            $scope.MembersList.push({id : Nic ,
+                first : FName ,
+                last: LName,
+                area: Area,
+                amount : balance,
+                date : ddate,
+                gid : gid,
+                address :Addr,
+                tel : teleph,
+                product : "filter"
+        })
+
+        };
 
     }]
 
