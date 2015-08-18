@@ -84,6 +84,7 @@ app.controller('UniCtrl', function ($scope, customersService) {
 app.controller('GroupCtrl', function($scope,$http,$rootScope){
 
     $rootScope.area = null;
+    $rootScope.PID = null;
     $scope.listofGroups= null;
 
     $scope.mypromise2 = $http.get('http://104.236.206.83:3000/group.summary')
@@ -99,13 +100,14 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
 
         var Balance = $scope.Balance;
         var ID = $scope.id;
-
+        var product = $scope.PID;
         var Number = 0;
-        var Area = $scope.area.charAt(0).toUpperCase() + $scope.area.toLowerCase()
+        var Area = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
         var pre = Area.substring(0, 3);
         var pre2 = pre.toUpperCase();
         ID = pre2+ ID;
         $rootScope.area = Area;
+        $rootScope.PID = product;
 
 
         //groupService.insertGroup(Balance,Area,ID,number);
@@ -168,14 +170,14 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
         //input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
 
         $scope.addMember = function(){
-            var FName  = $scope.firstName.charAt(0).toUpperCase() + $scope.firstName.toLowerCase() ;
-            var LName  = $scope.lastName.charAt(0).toUpperCase() + $scope.lastName.toLowerCase()
+            var FName  = $scope.firstName.charAt(0).toUpperCase() + $scope.firstName.substr(1).toLowerCase() ;
+            var LName  = $scope.lastName.charAt(0).toUpperCase() + $scope.lastName.substr(1).toLowerCase();
             var ddate  = $scope.DDate  ;
             var  Nic   = $scope.nic ;
             var balance= $scope.Balance  ;
-            var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.toLowerCase()
+            var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
             var gid =    $scope.GroupID;
-            var Addr =   $scope.address.charAt(0).toUpperCase() + $scope.address.toLowerCase()
+            var Addr =   $scope.address.charAt(0).toUpperCase() + $scope.address.substr(1).toLowerCase();
             var teleph = $scope.telephone;
 
             console.log(Addr);
@@ -229,6 +231,34 @@ app.controller('MemberCtrl2', ['$scope', '$http',
 
 );
 
+app.controller('TransCtrl', ['$scope', '$http',
+        function($scope, $http) {
+
+            var x = document.getElementById("nat").defaultValue;
+
+            var idz = $scope.NatIdentity;
+            var amountz = $scope.Bal;
+            var dueDatez = $scope.DuDate;
+            var TDate = $scope.toDate;
+            var CSE  = $scope.OffName;
+
+            $scope.trans = function () {
+                $http.post('http://104.236.206.83:3000/transaction',{
+                    id :idz,
+                    amount : amountz,
+                    due: dueDatez,
+                    date: TDate,
+                    code:CSE
+
+                });
+            };
+
+
+        }]
+
+
+);
+
 
 /*
 app.controller('MemberCtrl', ['$scope', 'membersFact', function($scope, membersFact)
@@ -254,6 +284,24 @@ app.controller('MemberProfileCtrl', ['$scope', '$routeParams', '$http',
                 console.log(data);
             });
 
+
+
+        }]
+
+
+);
+
+app.controller('DueCtrl', ['$scope', '$http',
+        function($scope, $http) {
+
+
+
+            $scope.DueList=null;
+            //console.log($routeParams);
+
+            $scope.mypromisedue = $http.get('http://104.236.206.83:3000/recent').success(function(data) {
+                $scope.DueList = data;
+            });
 
 
         }]

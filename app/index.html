@@ -316,7 +316,13 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular-busy/angular-busy.min.js"></script>
   <script src="bower_components/angular-scroll/ng-scrollbar.min.js"></script>
+  <script>
 
+
+    $("#myField").keyup(function() {
+      $("#myField").val(this.value.match(/[0-9]*/));
+    });
+  </script>
 
 
 </body>
