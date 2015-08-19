@@ -6,6 +6,7 @@ var app = angular.module('myApp', [
    'cgBusy',
   'ngScrollbar',
   'ngAnimate',
+  'angular-datepicker',
   'myApp.version'
 ]);
 
@@ -52,7 +53,18 @@ app.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
+angular.module('myApp').filter('date', function($filter)
+{
+  return function(input)
+  {
+    if(input == null){ return ""; }
 
+    var _date = $filter('date')(new Date(input), 'MMM-dd-yyyy');
+
+    return _date.toUpperCase();
+
+  };
+});
 
 
 

@@ -12,108 +12,10 @@
         <div class="under">
 
             <!-- Button trigger modal -->
-            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>
-                New Member
-            </button>
+
 
             <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel"> Add new Member</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row" style="padding-left: 15px;">
-                                <div class="col-lg-9 col-lg-offset-1 form">
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">First Name:</label>
 
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="firstName" type="text" placeholder="First Name">
-                                    </div>
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Last Name:</label>
-
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="lastName" type="text" placeholder="Last Name">
-                                    </div>
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">NIC:</label>
-
-                                        <div class="from-group input-group" style="padding-left: 1.7cm">
-
-                                            <input class="form-control pull-right"
-                                                   style="width: 267px; height: 35px" data-ng-model="nic" type="number" maxlength="9" placeholder="NIC">
-                                            <span class="input-group-addon">   V</span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="row" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Balance:</label>
-
-                                        <div class="from-group input-group" style="padding-left: 1.7cm">
-                                            <span class="input-group-addon">Rs.</span>
-                                            <input class="form-control"
-                                                   style=" height: 35px" data-ng-model="Balance" maxlength="9" type="number" placeholder="Balance">
-                                            <span class="input-group-addon">.00</span>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Due Date:</label>
-
-
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="DDate" type="date">
-
-                                    </div>
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Area:</label>
-
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="area" type="text" placeholder="Area">
-                                    </div>
-
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Telephone:</label>
-
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="telephone" type="number" placeholder="Telephone">
-                                    </div>
-
-                                    <div class="row from-group" style="padding-bottom: 5px">
-                                        <label class="pull-left" style="padding-left: 1cm">Address:</label>
-
-                                        <input class="form-control pull-right"
-                                               style="width: 300px; height: 35px" data-ng-model="address" type="text" placeholder="Address">
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="height: 2cm;;">
-
-
-                            <div class="row form-group pull-right" style="padding-top: 10px;padding-right: 20px;">
-
-                                <button type="button reset" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                <button class="btn btn-success btn-sm" type="button"
-                                        data-ng-disabled="!firstName || !lastName || !nic || !Balance || !DDate || !area  || !telephone"
-                                        data-ng-click=" addMember();" data-dismiss="modal"> Add Member</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
         </div>
 
         <div class="panel panel-white" ng-controller="TransCtrl" >
@@ -147,90 +49,11 @@
                                 <a href="#/members/{{member.NIC}}" class="btn btn-info btn-xs"  style="color: #ffffff" role="button"><i class="fa fa-user"></i> Profile</a>
 
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-warning btn-xs" ng-click="setNIC(member.NIC);" data-toggle="modal" data-target="#myModal2">
-                                    Payment
-                                </button>
+
                                 <!-- Modal -->
-                                <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel2"> Payment Window</h4>
-                                            </div>
-                                            <div class="modal-body">
 
-                                                <div class="row" style="padding-left: 15px;">
-                                                    <div class="col-lg-9 col-lg-offset-1 form">
-
-                                                        <div class="row from-group" style="padding-bottom: 5px">
-                                                            <label class="pull-left" style="padding-left: 1cm">NIC:</label>
-
-                                                            <input class="form-control pull-right"
-                                                                   style="width: 300px; height: 35px" data-ng-model="NatIdentity" type="number" placeholder="NIC">
-                                                        </div>
-
-                                                        <div class="row" style="padding-bottom: 5px">
-                                                            <label class="pull-left" style="padding-left: 1cm"> Amount: </label>
-
-                                                            <div class="from-group input-group" style="padding-left: 1.7cm">
-                                                                <span class="input-group-addon">Rs.</span>
-                                                                <input class="form-control"
-                                                                       style=" height: 35px" data-ng-model="Bal" type="number" placeholder="Balance">
-                                                                <span class="input-group-addon">.00 </span>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row from-group" style="padding-bottom: 5px">
-                                                            <label class="pull-left" style="padding-left: 1cm">Due Date:</label>
-
-
-                                                            <input class="form-control pull-right"
-                                                                   style="width: 300px; height: 35px" data-ng-model="DuDate" type="date">
-
-                                                        </div>
-
-                                                        <div class="row from-group" style="padding-bottom: 5px">
-                                                            <label class="pull-left" style="padding-left: 1cm">Date:</label>
-
-
-                                                            <input class="form-control pull-right"
-                                                                   style="width: 300px; height: 35px" data-ng-model="toDate" type="date">
-
-                                                        </div>
-
-                                                        <div class="row from-group" style="padding-bottom: 5px">
-                                                            <label class="pull-left" style="padding-left: 1cm">Officer:</label>
-
-                                                            <input class="form-control pull-right"
-                                                                   style="width: 300px; height: 35px" data-ng-model="OffName" type="text" placeholder="Officer Name">
-                                                        </div>
-
-
-
-
-
-
-
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                                                <button type="button" ng-click="trans(member.NIC,Bal,DuDate,toDate,OffName);" class="btn btn-primary btn-sm" data-dismiss="modal"> Done</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
                                 <!-- /.modal -->
-                                <button type="button" ng-click="deleteMember(member.NIC);" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
-                            </div>
+                                </div>
                             </td>
                         </tr>
 

@@ -25,6 +25,7 @@
               <h4 class="modal-title" id="myModalLabel"> Add new Member</h4>
             </div>
             <div class="modal-body">
+              <form data-toggle="validator" role="form">
                 <div class="row" style="padding-left: 15px;">
                   <div class="col-lg-9 col-lg-offset-1 form">
                     <div class="row from-group" style="padding-bottom: 5px">
@@ -52,12 +53,12 @@
                     </div>
 
                     <div class="row" style="padding-bottom: 5px">
-                      <label class="pull-left" style="padding-left: 1cm">Balance:</label>
+                      <label class="pull-left" style="padding-left: 1cm">Loan :</label>
 
-                      <div class="from-group input-group" style="padding-left: 1.7cm">
+                      <div class="from-group input-group" style="padding-left: 2.1cm">
                         <span class="input-group-addon">Rs.</span>
                         <input class="form-control"
-                               style=" height: 35px" data-ng-model="Balance" maxlength="9" type="number" placeholder="Balance">
+                               style=" height: 35px " data-ng-model="Balance" maxlength="9" type="number" placeholder="Balance" readonly>
                         <span class="input-group-addon">.00</span>
 
                       </div>
@@ -79,11 +80,13 @@
                              style="width: 300px; height: 35px" data-ng-model="area" type="text" placeholder="Area" readonly>
                     </div>
 
-                    <div class="row from-group" style="padding-bottom: 5px">
+                    <div class="row from-group" style="padding-bottom: 5px" >
                       <label class="pull-left" style="padding-left: 1cm">Telephone:</label>
 
                       <input class="form-control pull-right"
-                             style="width: 300px; height: 35px" data-ng-model="telephone" type="number" placeholder="Telephone">
+                             style="width: 300px; height: 35px" data-ng-model="telephone" type="text"
+                             placeholder="Telephone" minlength="10" data-minlength="6" maxlength="10">
+
                     </div>
 
                     <div class="row from-group" style="padding-bottom: 5px">
@@ -97,8 +100,9 @@
 
                   </div>
                 </div>
+                </form>
             </div>
-            <div class="modal-footer" style="height: 2cm;;">
+            <div class="modal-footer" style="height: 2cm;">
 
 
               <div class="row form-group pull-right" style="padding-top: 10px;padding-right: 20px;">
@@ -141,7 +145,7 @@
               <td>{{member.NIC}}</td>
               <td>{{member.FirstName}}  {{member.LastName}}</td>
               <td>Rs.{{member.Balance}}.00</td>
-              <td>{{member.DueDate}}</td>
+              <td>{{member.DueDate }}</td>
               <td>{{member.Area}}</td>
               <td><div class="btn-group">
                 <a href="#/members/{{member.NIC}}" class="btn btn-info btn-xs"  style="color: #ffffff" role="button"><i class="fa fa-user"></i> Profile</a>
@@ -176,7 +180,7 @@
                               <div class="from-group input-group" style="padding-left: 1.7cm">
                                 <span class="input-group-addon">Rs.</span>
                                 <input class="form-control"
-                                       style=" height: 35px" data-ng-model="Bal" type="number" placeholder="Balance">
+                                       style=" height: 35px" data-ng-model="Bal" type="number" placeholder="payment">
                                 <span class="input-group-addon">.00 </span>
 
                               </div>

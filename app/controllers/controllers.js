@@ -24,13 +24,18 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
         var Balance = $scope.Balance;
         var ID = $scope.id;
         var product = $scope.PID;
-        var Number = 0;
+        var Number = $scope.memNO;
+
+        var NextBal = Balance/Number;
         var Area = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
         var pre = Area.substring(0, 3);
         var pre2 = pre.toUpperCase();
         ID = pre2+ ID;
         $rootScope.area = Area;
         $rootScope.PID = product;
+        $rootScope.balTOmem = NextBal;
+
+        console.log(Number,Area,Balance,product,NextBal);
 
 
         //groupService.insertGroup(Balance,Area,ID,number);
@@ -68,6 +73,8 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
         var list = null;
         var fil = null;
         var Area = null;
+        var balance= null;
+
         //console.log($routeParams);
         $scope.GroupID = $routeParams.groupId;
         $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
@@ -94,31 +101,39 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
 
         function init2(){
-            //console.log(angular.isDefined(list));
 
 
             if (list.length != 0){
                 console.log("nad");
                  fil = list[0].ProductID;
                  $scope.area = list[0].Area;
+                Area = $scope.area;
+                balance = list[0].Balance;
+                $scope.Balance = balance;
             }
             else{
+                console.log("in else");
                  fil = $rootScope.PID;
                 $scope.area = $rootScope.area;
+                Area = $scope.area;
+                balance = $rootScope.balTOmem;
+                $scope.Balance = balance;
 
             }
+            console.log(balance);
 
 
-        };
+
+        }
 
         //input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
 
         $scope.addMember = function(){
             var FName  = $scope.firstName.charAt(0).toUpperCase() + $scope.firstName.substr(1).toLowerCase() ;
             var LName  = $scope.lastName.charAt(0).toUpperCase() + $scope.lastName.substr(1).toLowerCase();
-            var ddate  = $scope.DDate  ;
+            var ddate  = $scope.DDate;
             var  Nic   = $scope.nic ;
-            var balance= $scope.Balance  ;
+
             //var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
             var gid =    $scope.GroupID;
             var Addr =   $scope.address.charAt(0).toUpperCase() + $scope.address.substr(1).toLowerCase();
@@ -149,23 +164,72 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
         });
 
+            //$scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
+            //    $scope.MembersList = data;
+            //    list = data;
+            //    console.log(data);
+            //    init2();
+            //});
+
+
+
         };
 
         $scope.deleteMember=function(Id){
+
+            //for (var i = $scope.MembersList.length - 1; i >= 0; i--) {
+            //    console.log($scope.MembersList[i].NIC);
+            //    if ($scope.MembersList[i].NIC === Id) {
+            //        $scope.MembersList.splice(i, 1);
+            //        console.log("success in local");
+            //        break;
+            //    }
+            //}
+
             $scope.mypromiseDmember = $http.get('http://104.236.206.83:3000/delete/' + Id ).success(function(data) {
                 $scope.MembersList = data;
                 console.log(data);
                 console.log("success");
+
+
+            });
+
+            $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
+                $scope.MembersList = data;
+                list = data;
+                console.log(data);
+                init2();
             });
 
 
-            for (var i = $scope.MembersList.length - 1; i >= 0; i--) {
-                if ($scope.MembersList[i].NIC === Id) {
-                    $scope.MembersList.splice(i, 1);
-                    console.log("success in local");
-                    break;
-                }
-            }
+        };
+
+
+        var amountz = null;
+        var dueDatez = null;
+        var TDate = null;
+        var CSE  = null;
+        var idz = null;
+        console.log(idz);
+
+        $scope.trans = function (idz,amountz,dueDatez,TDate,CSE) {
+            $http.post('http://104.236.206.83:3000/transaction',{
+                id :idz,
+                amount : amountz,
+                due: dueDatez,
+                date: TDate,
+                code:CSE
+
+            });
+            console.log(idz,amountz,dueDatez,TDate,CSE);
+
+            $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
+                $scope.MembersList = data;
+                //list = data;
+                //console.log(data);
+                //init2();
+            });
+
 
 
         };
@@ -207,17 +271,27 @@ app.controller('TransCtrl', ['$scope', '$http',
             var idz = null;
             console.log(idz);
 
-            $scope.trans = function (idz,amountz,dueDatez,TDate,CSE) {
-                $http.post('http://104.236.206.83:3000/transaction',{
-                    id :idz,
-                    amount : amountz,
-                    due: dueDatez,
-                    date: TDate,
-                    code:CSE
-
-                });
-                console.log(idz,amountz,dueDatez,TDate,CSE);
-            };
+            //$scope.trans = function (idz,amountz,dueDatez,TDate,CSE) {
+            //    $http.post('http://104.236.206.83:3000/transaction',{
+            //        id :idz,
+            //        amount : amountz,
+            //        due: dueDatez,
+            //        date: TDate,
+            //        code:CSE
+            //
+            //    });
+            //    console.log(idz,amountz,dueDatez,TDate,CSE);
+            //
+            //    $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
+            //        $scope.MembersList = data;
+            //        list = data;
+            //        console.log(data);
+            //        init2();
+            //    });
+            //
+            //
+            //
+            //};
 
             $scope.setNIC =function(val){
 

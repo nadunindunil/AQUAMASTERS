@@ -147,7 +147,7 @@
                             </div>
                             <div class="panel-body">
                                 <div class="list-group">
-                                    <a href="#/members/{{due.NIC}}" class="list-group-item" style="height: 1.5cm;" ng-repeat="due in DueList">
+                                    <a href="#/members/{{due.NIC}}" class="list-group-item" style="height: 1.5cm;" ng-repeat="due in DueList | orderBy:'DueDate'">
                                         <i class="fa fa-calendar fa-fw"></i> {{due.FirstName}} {{due.LastName}}
                                     <span class="pull-right text-muted small"><em>{{due.DueDate}}</em>
                                     </span>
