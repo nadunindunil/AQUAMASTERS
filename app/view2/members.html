@@ -106,7 +106,7 @@
                 <button type="button reset" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 <button class="btn btn-success btn-sm" type="button"
                         data-ng-disabled="!firstName || !lastName || !nic || !Balance || !DDate || !area  || !telephone"
-                        data-ng-click=" addMember();" data-dismiss="modal"> Add Memeber</button>
+                        data-ng-click=" addMember();" data-dismiss="modal"> Add Member</button>
               </div>
             </div>
           </div>
@@ -140,14 +140,14 @@
             <tr class="repeat-animation" data-ng-repeat="member in MembersList| filter:query | orderBy:'Name'">
               <td>{{member.NIC}}</td>
               <td>{{member.FirstName}}  {{member.LastName}}</td>
-              <td>{{member.Balance}}.00</td>
+              <td>Rs.{{member.Balance}}.00</td>
               <td>{{member.DueDate}}</td>
               <td>{{member.Area}}</td>
               <td><div class="btn-group">
                 <a href="#/members/{{member.NIC}}" class="btn btn-info btn-xs"  style="color: #ffffff" role="button"><i class="fa fa-user"></i> Profile</a>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
+
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal2">
+                <button type="button" class="btn btn-warning btn-xs" ng-click="setNIC(member.NIC);" data-toggle="modal" data-target="#myModal2">
                   Payment
                 </button>
                 <!-- Modal -->
@@ -221,7 +221,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"> Done</button>
+                        <button type="button" ng-click="trans(member.NIC);" class="btn btn-primary btn-sm" data-dismiss="modal"> Done</button>
                       </div>
                     </div>
                     <!-- /.modal-content -->
@@ -229,6 +229,7 @@
                   <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
+                <button type="button" ng-click="deleteMember(member.NIC);" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>
               </div>
               </td>
             </tr>

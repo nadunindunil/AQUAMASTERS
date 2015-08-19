@@ -207,6 +207,14 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
         };
 
+        $scope.deleteMember=function(Id){
+            $scope.mypromiseDmember = $http.get('http://104.236.206.83:3000/delete/' + Id ).success(function(data) {
+                $scope.MembersList = data;
+                console.log(data);
+                console.log("success");
+            });
+        };
+
     }]
 
 
@@ -221,7 +229,7 @@ app.controller('MemberCtrl2', ['$scope', '$http',
             $scope.MembersList=null;
             //console.log($routeParams);
 
-            $scope.mypromise = $http.get('http://104.236.206.83:3000/users').success(function(data) {
+            $scope.mypromise12 = $http.get('http://104.236.206.83:3000/users').success(function(data) {
                 $scope.MembersList = data;
             });
 
@@ -234,15 +242,16 @@ app.controller('MemberCtrl2', ['$scope', '$http',
 app.controller('TransCtrl', ['$scope', '$http',
         function($scope, $http) {
 
-            var x = document.getElementById("nat").defaultValue;
+            //var x = document.getElementById("nat").defaultValue;
 
-            var idz = $scope.NatIdentity;
+            //var idz = $scope.NatIdentity;
             var amountz = $scope.Bal;
             var dueDatez = $scope.DuDate;
             var TDate = $scope.toDate;
             var CSE  = $scope.OffName;
+            console.log(idz);
 
-            $scope.trans = function () {
+            $scope.trans = function (idz) {
                 $http.post('http://104.236.206.83:3000/transaction',{
                     id :idz,
                     amount : amountz,
@@ -251,7 +260,16 @@ app.controller('TransCtrl', ['$scope', '$http',
                     code:CSE
 
                 });
+                console.log(idz);
             };
+
+            $scope.setNIC =function(val){
+
+                $scope.NatIdentity= val;
+
+            };
+
+
 
 
         }]
