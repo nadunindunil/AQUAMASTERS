@@ -21,6 +21,10 @@ app.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'partials/members2.html',
           controller: 'MemberCtrl2'
         }).
+        when('/dues', {
+          templateUrl: 'partials/dues.html',
+          controller: 'DueCtrl'
+        }).
         when('/members/:NIC', {
           templateUrl: 'partials/memProfile.html',
           controller: 'MemberProfileCtrl'

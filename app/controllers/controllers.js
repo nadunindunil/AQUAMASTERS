@@ -221,7 +221,10 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
                 code:CSE
 
             });
+            console.log("pre");
             console.log(idz,amountz,dueDatez,TDate,CSE);
+
+            $scope.MembersList=null;
 
             $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
                 $scope.MembersList = data;
