@@ -62,15 +62,22 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
     function($scope, $routeParams, $http , $rootScope ) {
 
-        init();
+
 
         $scope.MembersList=null;
+        var list = null;
+        var fil = null;
+        var Area = null;
         //console.log($routeParams);
         $scope.GroupID = $routeParams.groupId;
         $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             $scope.MembersList = data;
+            list = data;
             console.log(data);
+            init2();
         });
+
+
 
         $scope.reset = function(){
             $scope.firstName = null;
@@ -84,11 +91,25 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
         };
 
-        function init() {
-            $scope.area = $rootScope.area;
 
 
-        }
+        function init2(){
+            //console.log(angular.isDefined(list));
+
+
+            if (list.length != 0){
+                console.log("nad");
+                 fil = list[0].ProductID;
+                 $scope.area = list[0].Area;
+            }
+            else{
+                 fil = $rootScope.PID;
+                $scope.area = $rootScope.area;
+
+            }
+
+
+        };
 
         //input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
 
@@ -98,10 +119,11 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
             var ddate  = $scope.DDate  ;
             var  Nic   = $scope.nic ;
             var balance= $scope.Balance  ;
-            var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
+            //var Area   = $scope.area.charAt(0).toUpperCase() + $scope.area.substr(1).toLowerCase();
             var gid =    $scope.GroupID;
             var Addr =   $scope.address.charAt(0).toUpperCase() + $scope.address.substr(1).toLowerCase();
             var teleph = $scope.telephone;
+
 
             console.log(Addr);
 
@@ -114,8 +136,7 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
                 gid : gid,
                 address :Addr,
                 tel : teleph,
-                product : "filter"
-
+                product : fil
             });
 
             $scope.MembersList.push({NIC : Nic ,
@@ -138,13 +159,14 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
             });
 
 
-                for (var i = MembersList.length - 1; i >= 0; i--) {
-                    if (MembersList[i].id === Id) {
-                        MembersList.splice(i, 1);
-                        console.log("success in local");
-                        break;
-                    }
+            for (var i = $scope.MembersList.length - 1; i >= 0; i--) {
+                if ($scope.MembersList[i].NIC === Id) {
+                    $scope.MembersList.splice(i, 1);
+                    console.log("success in local");
+                    break;
                 }
+            }
+
 
         };
 
@@ -159,11 +181,11 @@ app.controller('MemberCtrl2', ['$scope', '$http',
 
 
 
-            $scope.MembersList=null;
+            $scope.MembersList2=null;
             //console.log($routeParams);
 
             $scope.mypromise12 = $http.get('http://104.236.206.83:3000/users').success(function(data) {
-                $scope.MembersList = data;
+                $scope.MembersList2 = data;
             });
 
 

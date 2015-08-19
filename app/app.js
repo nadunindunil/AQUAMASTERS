@@ -16,8 +16,8 @@ app.config(['$routeProvider', function($routeProvider) {
           templateUrl: 'view1/view1.html',
           controller: 'MemberCtrl'
         }).
-        when('/members', {
-          templateUrl: 'view2/members.html',
+        when('/members2', {
+          templateUrl: 'partials/members2.html',
           controller: 'MemberCtrl2'
         }).
         when('/members/:NIC', {
