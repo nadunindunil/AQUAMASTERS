@@ -14,7 +14,7 @@ app.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/view1', {
           templateUrl: 'view1/view1.html',
-          controller: 'UniCtrl'
+          controller: 'MemberCtrl'
         }).
         when('/members', {
           templateUrl: 'view2/members.html',
@@ -35,11 +35,11 @@ app.config(['$routeProvider', function($routeProvider) {
         }).
         when('/dashboard', {
           templateUrl: 'partials/dashboard.html',
-          controller: 'UniCtrl'
+          controller: 'GroupCtrl'
         }).
         when('/profile', {
           templateUrl: 'partials/profile.html',
-          controller: 'UniCtrl'
+          controller: 'MemberProfileCtrl'
         }).
         when('/notifications', {
           templateUrl: 'partials/notifications.html',

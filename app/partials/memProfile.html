@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row" ng-controller="MemberProfileCtrl">
     <ol class="breadcrumb" style="background-color: transparent">
         <li><a href="#/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#/groups"><i class="fa fa-users"></i> Group</a></li>
-        <li><a href="#/members"><i class="fa fa-user"></i> Member</a></li>
+        <li><a href="#/groups/{{ProfileContent.Group}}"><i class="fa fa-user"></i> Members</a></li>
         <li class="active">Profile</li>
     </ol>
 
@@ -30,6 +30,7 @@
                         </div>
                         <div class="col-lg-8">
                             <h4> {{ProfileContent.First}} {{ProfileContent.Last}}</h4>
+                            <h5> {{ProfileContent.NIC}}</h5>
                             <h5> {{ProfileContent.Area}}</h5>
                             <h5> <i class="fa fa-users"></i> {{ProfileContent.Group}}</h5>
                             <h6><i class="fa fa-phone"></i> {{ProfileContent.Telephone}}</h6>
@@ -42,7 +43,7 @@
 
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <div class="panel panel-white">
                 <div class="panel-heading">
                     Transaction History {{Transactions.length}}
@@ -57,6 +58,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Amount</th>
+                                <th>Officer Description</th>
 
                             </tr>
                             </thead>
@@ -64,6 +66,7 @@
                             <tr data-ng-repeat="trans in Transactions | filter:query">
                                 <td>{{trans.date}}</td>
                                 <td>  Rs.{{trans.amount}}.00</td>
+                                <td>  {{trans.officer}}</td>
 
                             </tr>
 
@@ -74,17 +77,7 @@
 
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="panel panel-white">
-                <div class="panel-heading">
-                    Working Hours and Days
-                </div>
-                <div class="panel-body">
 
-                </div>
-
-            </div>
-        </div>
 
     </div>
 </div>
