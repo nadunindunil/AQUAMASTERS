@@ -9,11 +9,15 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
     $rootScope.area = null;
     $rootScope.PID = null;
     $scope.listofGroups= null;
+    var groupList = null;
 
     $scope.mypromise2 = $http.get('http://104.236.206.83:3000/group.summary')
         .success(function(data) {
             console.log(data);
-            $scope.listofGroups = data;}
+            $scope.listofGroups = data;
+            var groupList = $scope.listofGroups;
+        }
+
     );
 
 
@@ -37,12 +41,34 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
 
         console.log(Number,Area,Balance,product,NextBal);
 
+        // send notifications needed
+        var x= 0;
+        for( var i=0 ; i < $scope.listofGroups.length ; i++ ){
+            console.log("in loop");
+            if ($scope.listofGroups[i]._id == ID){
+                alert(" Group " + ID + " Exist!");
+                x=1;
+                console.log("loop ends");
+                break;
 
-        //groupService.insertGroup(Balance,Area,ID,number);
-        $scope.listofGroups.push({ _id : ID ,
-            number : Number ,
-            balance: Balance,
-            area: Area} );
+            }
+
+        }
+
+        if (x == 0){
+
+            $http.post('http://104.236.206.83:3000/createNotifi',{ info: "Group " + ID
+            +" added to Database with " + Balance + " number of members: " + Number});
+
+
+            //groupService.insertGroup(Balance,Area,ID,number);
+            $scope.listofGroups.push({ _id : ID ,
+                number : Number ,
+                balance: Balance,
+                area: Area} );
+        }
+
+
     };
 
     /*
@@ -52,6 +78,29 @@ app.controller('GroupCtrl', function($scope,$http,$rootScope){
 
     };
     */
+
+    $scope.deleteGroup = function(Id){
+
+        $scope.mypromiseDGroups = $http.get('http://104.236.206.83:3000/deletegroup/' + Id ).success(function(data) {
+            $scope.listofGroups = data;
+            console.log(data);
+            console.log("success group delete");
+
+
+        });
+
+
+        $scope.mypromise = $http.get('hhttp://104.236.206.83:3000/group.summary').success(function(data) {
+            $scope.listofGroups = data;
+
+            console.log(data);
+            init2();
+        });
+
+        $http.post('http://104.236.206.83:3000/createNotifi',{ info: "Group "+ Id + " Deleted " });
+
+
+    }
 });
 
 /*
@@ -66,6 +115,8 @@ app.controller('GroupCtrl', ['$scope', 'groupsFact', function($scope, groupsFact
 
 app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
     function($scope, $routeParams, $http , $rootScope ) {
+
+
 
 
 
@@ -142,6 +193,10 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
             console.log(Addr);
 
+            $http.post('http://104.236.206.83:3000/createNotifi',{ info: "Member "+ FName+" "+LName + " added to Group " + $scope.GroupID });
+
+            console.log("after post noti");
+
             $http.post('http://104.236.206.83:3000/adduser',{ id : Nic ,
                 first : FName ,
                 last: LName,
@@ -163,6 +218,7 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
 
         });
+            // send notifications needed
 
             //$scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
             //    $scope.MembersList = data;
@@ -177,14 +233,24 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
 
         $scope.deleteMember=function(Id){
 
+            var user = null;
+
             //for (var i = $scope.MembersList.length - 1; i >= 0; i--) {
             //    console.log($scope.MembersList[i].NIC);
             //    if ($scope.MembersList[i].NIC === Id) {
-            //        $scope.MembersList.splice(i, 1);
-            //        console.log("success in local");
+            //        //$scope.MembersList.splice(i, 1);
+            //        console.log("success in local",MembersList[i].FirstName);
             //        break;
             //    }
             //}
+            $http.get('http://104.236.206.83:3000/find/' + Id ).success(function(data) {
+                //user = data;
+                console.log(data.FirstName,data.LastName);
+                $http.post('http://104.236.206.83:3000/createNotifi',{ info: "Member "+ data.FirstName +" " + data.LastName + " deleted from Group " + $scope.GroupID });
+
+            });
+
+            // send notifications needed
 
             $scope.mypromiseDmember = $http.get('http://104.236.206.83:3000/delete/' + Id ).success(function(data) {
                 $scope.MembersList = data;
@@ -212,29 +278,92 @@ app.controller('MemberCtrl', ['$scope', '$routeParams', '$http', '$rootScope',
         var idz = null;
         console.log(idz);
 
+
         $scope.trans = function (idz,amountz,dueDatez,TDate,CSE) {
-            $http.post('http://104.236.206.83:3000/transaction',{
-                id :idz,
-                amount : amountz,
-                due: dueDatez,
-                date: TDate,
-                code:CSE
+
+            $http.get('http://104.236.206.83:3000/find/' +idz ).success(function(data) {
+                $scope.Member = data;
+                list = data;
+                console.log(data);
+
+                var y= 0;
+                var c =0;
+
+
+                if ($scope.Member.Balance < amountz || amountz < 1 ){
+
+
+                    alert("enter valid amount!");
+                }
+                else if (dueDatez < TDate){
+
+                    alert("Due Date must be greater than Ttoday's date!");
+
+
+                }
+                else{
+
+                    console.log("loop ends");
+                    $http.post('http://104.236.206.83:3000/transaction',{
+                        id :idz,
+                        amount : amountz,
+                        due: dueDatez,
+                        date: TDate,
+                        code:CSE
+
+                    });
+                    console.log("pre");
+
+
+                    console.log(idz,amountz,dueDatez,TDate,CSE);
+
+
+                    // send notifications needed
+
+                    $http.get('http://104.236.206.83:3000/find/' + idz ).success(function(data) {
+                        //user = data;
+                        console.log(data.FirstName,data.LastName);
+                        $http.post('http://104.236.206.83:3000/createNotifi',{ info: "Member "+ data.FirstName +" " + data.LastName +" in "+ data.Group + " paid Rs." + amountz +".00"});
+
+                    });
+
+                    getList();
+
+
+                    $scope.NatIdentity = null;
+                    $scope.Bal = null;
+                    $scope.DuDate = null;
+                    $scope.toDate = null;
+                    $scope.offName = null;
+                }
+
+
+
+
+
 
             });
-            console.log("pre");
-            console.log(idz,amountz,dueDatez,TDate,CSE);
 
+
+
+
+
+
+
+
+
+        };
+
+
+        $scope.getList = function(){
             $scope.MembersList=null;
 
             $scope.mypromise = $http.get('http://104.236.206.83:3000/groupinfo/' + $routeParams.groupId ).success(function(data) {
                 $scope.MembersList = data;
-                //list = data;
-                //console.log(data);
-                //init2();
+                list = data;
+                console.log(data);
+                init2();
             });
-
-
-
         };
 
     }]
@@ -353,6 +482,26 @@ app.controller('DueCtrl', ['$scope', '$http',
             $scope.mypromisedue = $http.get('http://104.236.206.83:3000/recent').success(function(data) {
                 $scope.DueList = data;
             });
+
+
+        }]
+
+
+);
+
+
+app.controller('NotificationsCtrl', ['$scope', '$http',
+        function($scope, $http) {
+
+
+
+            $scope.NotificationsList=null;
+            //console.log($routeParams);
+
+            $scope.mypromisedue = $http.get('http://104.236.206.83:3000/getNotifi').success(function(data) {
+                $scope.NotificationsList = data;
+            });
+            //console.log(NotificationsList);
 
 
         }]

@@ -72,6 +72,13 @@ angular.module('myApp').filter('date', function($filter)
 
 
 
+
+app.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+});
+
 var customers = [
   {
     id: 1, firstName: 'Lee', lastName: 'Carroll', address: '1234 Anywhere St.', city: 'Phoenix',

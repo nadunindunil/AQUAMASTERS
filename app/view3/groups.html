@@ -58,12 +58,25 @@
                                 <div class="row from-group" style="padding-bottom: 5px">
                                     <label class="pull-left" style="padding-left: 1cm">Product ID:</label>
 
-                                    <input class="form-control pull-right"
+
+                                    <select style="width: 300px; height: 35px" data-ng-model="PID" class="form-control pull-right">
+                                        <option>PURO 1500</option>
+                                        <option>PURO 3000</option>
+                                        <option>PURO 4500</option>
+                                        <option>PURO 6000</option>
+                                        <option>PURO 9000</option>
+                                        <option>PURO 12000</option>
+                                    </select>
+
+
+
+                                    <!--<input class="form-control pull-right"
                                            style="width: 300px; height: 35px" data-ng-model="PID" type="text" placeholder="Product">
+                                -->
                                 </div>
 
                                 <div class="row" style="padding-bottom: 5px">
-                                    <label class="pull-left" style="padding-left: 1cm">ID:</label>
+                                    <label class="pull-left" style="padding-left: 1cm"> ID:</label>
 
                                     <div class="from-group input-group" style="padding-left: 2.8cm">
                                         <span class="input-group-addon" data-ng-model="preID"> {{area | limitTo : 3 : 0 | uppercase}}</span>
@@ -90,7 +103,7 @@
 
                             <a href="" class="btn btn-success btn-sm" type="button"
                                data-ng-disabled="!Balance  || !id || !area "
-                               ng-click="insertGroup()" data-dismiss="modal"
+                               ng-click="insertGroup()"
                                role="button"> Add members</a>
                         </div>
                     </div>
@@ -131,7 +144,7 @@
                       <td><div class="btn-group">
 
                           <a href="#/groups/{{group._id}}" class="btn btn-info btn-xs"  style="color: #ffffff" role="button"><i class="fa fa-users"></i> View</a>
-                          <a href="" class="btn btn-danger btn-xs" role="button"  style="color: #ffffff"><i class="fa fa-trash-o"></i></a>
+                          <a href="" class="btn btn-danger btn-xs" ng-click="deleteGroup(group._id);" role="button"  style="color: #ffffff"><i class="fa fa-trash-o"></i></a>
 
 
                       </div></td>
